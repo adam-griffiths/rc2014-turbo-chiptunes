@@ -1,5 +1,5 @@
 # rc2014-turbo-chiptunes
-Turbo Pascal 3.0 INC file with Procedures and Helpers for the YM/AY Sound Card targeted at the YM2149 Chip
+Turbo Pascal 3.0 INC file with Procedures and Helpers for the YM/AY Sound Card targeted at the YM2149 Chip (I don't have the AY chip to test with).
 
 Good Evening Mr Dillinger...
 
