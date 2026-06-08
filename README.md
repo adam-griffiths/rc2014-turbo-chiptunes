@@ -142,8 +142,6 @@ Practical notes:
 - very low notes may exceed chip period limits
 - very high notes may sound thin or harsh
 
-
-=========
 Variables
 =========
 
