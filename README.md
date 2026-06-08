@@ -60,9 +60,9 @@ General Notes
    If chip clocking changes, pitch tables may need recalculation.
 
 
-======================================================================
+=========
 Constants
-======================================================================
+=========
 
 Port Constants
 --------------
@@ -145,9 +145,9 @@ Practical notes:
 - very high notes may sound thin or harsh
 
 
-======================================================================
+=========
 Variables
-======================================================================
+=========
 
 YMMixerReg
 ----------
@@ -170,9 +170,9 @@ YMSetTempo
 Normally you should use YMSetTempo rather than assigning YMTempo directly.
 
 
-======================================================================
+================================
 Procedure and Function Reference
-======================================================================
+================================
 
 Low-Level Hardware Access
 -------------------------
@@ -670,9 +670,9 @@ Behavior:
 Same idea as YMPlayMajorTriad.
 
 
-======================================================================
+========================================
 Suggested Public API vs Internal Helpers
-======================================================================
+========================================
 
 Recommended Public API
 ----------------------
@@ -737,9 +737,9 @@ YMDelayUnits
 Use them when you want more manual control.
 
 
-======================================================================
+=========================
 Envelope Shapes Reference
-======================================================================
+=========================
 
 The envelope shape is written to register 13.
 Only values 0..15 are valid.
@@ -782,9 +782,9 @@ Important:
 Writing YMSetEnvShape(...) retriggers the envelope.
 
 
-======================================================================
+======================
 Typical Usage Patterns
-======================================================================
+======================
 
 1. Basic fixed-volume note
 --------------------------
@@ -836,9 +836,9 @@ Example idea:
 YMPlayMajorTriad('C', AccNatural, 4, 10, NLHalf);
 
 
-======================================================================
+===================
 Cautions and Limits
-======================================================================
+===================
 
 1. Envelope generator is shared globally.
    All channels using envelope mode share the same envelope shape and speed.
@@ -857,9 +857,9 @@ Cautions and Limits
    It does not disable tone generation bits in the mixer.
 
 
-======================================================================
+=============================
 Recommended Development Style
-======================================================================
+=============================
 
 - Treat YMInit as required startup.
 - Use YMGetPeriod + YMPlayNote for simple melodies.
