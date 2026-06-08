@@ -59,8 +59,6 @@ General Notes
 6. Period constants in this file are tuned to the target hardware setup.
    If chip clocking changes, pitch tables may need recalculation.
 
-
-=========
 Constants
 =========
 
@@ -169,8 +167,6 @@ YMSetTempo
 
 Normally you should use YMSetTempo rather than assigning YMTempo directly.
 
-
-================================
 Procedure and Function Reference
 ================================
 
@@ -669,8 +665,6 @@ Current supported roots:
 Behavior:
 Same idea as YMPlayMajorTriad.
 
-
-========================================
 Suggested Public API vs Internal Helpers
 ========================================
 
@@ -736,8 +730,6 @@ YMDelayUnits
 
 Use them when you want more manual control.
 
-
-=========================
 Envelope Shapes Reference
 =========================
 
@@ -781,8 +773,6 @@ Common useful choices:
 Important:
 Writing YMSetEnvShape(...) retriggers the envelope.
 
-
-======================
 Typical Usage Patterns
 ======================
 
@@ -835,8 +825,6 @@ or
 Example idea:
 YMPlayMajorTriad('C', AccNatural, 4, 10, NLHalf);
 
-
-===================
 Cautions and Limits
 ===================
 
@@ -856,8 +844,6 @@ Cautions and Limits
 5. YMNoteOff works by setting volume to 0.
    It does not disable tone generation bits in the mixer.
 
-
-=============================
 Recommended Development Style
 =============================
 
