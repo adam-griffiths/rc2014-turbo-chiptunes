@@ -41,7 +41,7 @@ begin
     0: YMMixerReg := YMMixerReg and 55;
     1: YMMixerReg := YMMixerReg and 47;
     2: YMMixerReg := YMMixerReg and 31;
-  end;
+ end;
   YMWrite(7, YMMixerReg);
 end;
 
@@ -60,23 +60,23 @@ end;
 procedure YMSetTone(Channel, Period : integer);
 begin
   if Period < 1 then Period := 1;
-    case Channel of
-      0:
-        begin
-          YMWrite(0, Period mod 256);
-          YMWrite(1, (Period div 256) mod 16);
-        end;
-      1:
-        begin
-          YMWrite(2, Period mod 256);
-          YMWrite(3, (Period div 256) mod 16);
-        end;
-      2:
-        begin
-          YMWrite(4, Period mod 256);
-          YMWrite(5, (Period div 256) mod 16);
-        end;
-    end;
+  case Channel of
+    0:
+      begin
+        YMWrite(0, Period mod 256);
+        YMWrite(1, (Period div 256) mod 16);
+      end;
+    1:
+      begin
+        YMWrite(2, Period mod 256);
+        YMWrite(3, (Period div 256) mod 16);
+      end;
+    2:
+      begin
+        YMWrite(4, Period mod 256);
+        YMWrite(5, (Period div 256) mod 16);
+      end;
+  end;
 end;
 
 { Set channel volume from 0 to 15 }
@@ -98,7 +98,7 @@ begin
     0: YMWrite(8, 16);
     1: YMWrite(9, 16);
     2: YMWrite(10, 16);
-   end;
+  end;
 end;
 
 { Use fixed volume on one channel }
@@ -150,7 +150,7 @@ end;
 { Crude software delay loop }
 procedure YMRawDelay(Count : integer);
 var
-  I, J : integer;
+I, J : integer;
 
 begin
   for I := 1 to Count do
@@ -169,7 +169,7 @@ end;
 { Delay by note-length units }
 procedure YMDelayUnits(Units : integer);
 begin
-   YMRawDelay(Units * YMTempo);
+  YMRawDelay(Units * YMTempo);
 end;
 
 { Turn on a note using raw period value and fixed volume }
@@ -218,7 +218,7 @@ end;
 procedure YMPlayPeriod(Channel, Period, Volume, Length : integer);
 begin
   if Period = N_REST then
-    begin
+   begin
       YMNoteOff(Channel);
       YMDelayUnits(Length);
     end
@@ -248,274 +248,197 @@ end;
 
 { Convert note name, accidental, and octave to a YM period }
 function YMGetPeriod(NoteName, Accidental : char;
-  Octave : integer) : integer;
+Octave : integer) : integer;
 begin
-YMGetPeriod := 0;
-
-if Octave = 3 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C3;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS3;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D3;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS3;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS3;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E3;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS3;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F3;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS3;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G3;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS3;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS3;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A3;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS3;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS3;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B3;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS3;
+  YMGetPeriod := 0;
+  if Octave = 3 then
+    begin
+      if (NoteName = 'C') and
+        (Accidental = AccNatural) then YMGetPeriod := N_C3;
+      if (NoteName = 'C') and
+        (Accidental = AccSharp) then YMGetPeriod := N_CS3;
+      if (NoteName = 'D') and
+        (Accidental = AccNatural) then YMGetPeriod := N_D3;
+      if (NoteName = 'D') and
+        (Accidental = AccSharp) then YMGetPeriod := N_DS3;
+      if (NoteName = 'D') and
+        (Accidental = AccFlat) then YMGetPeriod := N_CS3;
+      if (NoteName = 'E') and
+        (Accidental = AccNatural) then YMGetPeriod := N_E3;
+      if (NoteName = 'E') and
+        (Accidental = AccFlat) then YMGetPeriod := N_DS3;
+      if (NoteName = 'F') and
+        (Accidental = AccNatural) then YMGetPeriod := N_F3;
+      if (NoteName = 'F') and
+        (Accidental = AccSharp) then YMGetPeriod := N_FS3;
+      if (NoteName = 'G') and
+        (Accidental = AccNatural) then YMGetPeriod := N_G3;
+      if (NoteName = 'G') and
+        (Accidental = AccSharp) then YMGetPeriod := N_GS3;
+      if (NoteName = 'G') and
+        (Accidental = AccFlat) then YMGetPeriod := N_FS3;
+      if (NoteName = 'A') and
+        (Accidental = AccNatural) then YMGetPeriod := N_A3;
+      if (NoteName = 'A') and
+        (Accidental = AccSharp) then YMGetPeriod := N_AS3;
+      if (NoteName = 'A') and
+        (Accidental = AccFlat) then YMGetPeriod := N_GS3;
+      if (NoteName = 'B') and
+        (Accidental = AccNatural) then YMGetPeriod := N_B3;
+      if (NoteName = 'B') and
+        (Accidental = AccFlat) then YMGetPeriod := N_AS3;
     end;
 
   if Octave = 4 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C4;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS4;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D4;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS4;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS4;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E4;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS4;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F4;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS4;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G4;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS4;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS4;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A4;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS4;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS4;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B4;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS4;
-  end;
+    begin
+      if (NoteName = 'C') and
+        (Accidental = AccNatural) then YMGetPeriod := N_C4;
+      if (NoteName = 'C') and
+        (Accidental = AccSharp) then YMGetPeriod := N_CS4;
+      if (NoteName = 'D') and
+        (Accidental = AccNatural) then YMGetPeriod := N_D4;
+      if (NoteName = 'D') and
+        (Accidental = AccSharp) then YMGetPeriod := N_DS4;
+      if (NoteName = 'D') and
+        (Accidental = AccFlat) then YMGetPeriod := N_CS4;
+      if (NoteName = 'E') and
+        (Accidental = AccNatural) then YMGetPeriod := N_E4;
+      if (NoteName = 'E') and
+        (Accidental = AccFlat) then YMGetPeriod := N_DS4;
+      if (NoteName = 'F') and
+        (Accidental = AccNatural) then YMGetPeriod := N_F4;
+      if (NoteName = 'F') and
+        (Accidental = AccSharp) then YMGetPeriod := N_FS4;
+      if (NoteName = 'G') and
+        (Accidental = AccNatural) then YMGetPeriod := N_G4;
+      if (NoteName = 'G') and
+        (Accidental = AccSharp) then YMGetPeriod := N_GS4;
+      if (NoteName = 'G') and
+        (Accidental = AccFlat) then YMGetPeriod := N_FS4;
+      if (NoteName = 'A') and
+        (Accidental = AccNatural) then YMGetPeriod := N_A4;
+      if (NoteName = 'A') and
+        (Accidental = AccSharp) then YMGetPeriod := N_AS4;
+      if (NoteName = 'A') and
+        (Accidental = AccFlat) then YMGetPeriod := N_GS4;
+      if (NoteName = 'B') and
+        (Accidental = AccNatural) then YMGetPeriod := N_B4;
+      if (NoteName = 'B') and
+        (Accidental = AccFlat) then YMGetPeriod := N_AS4;
+    end;
 
   if Octave = 5 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C5;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS5;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D5;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS5;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS5;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E5;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS5;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F5;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS5;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G5;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS5;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS5;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A5;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS5;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS5;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B5;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS5;
-  end;
+    begin
+      if (NoteName = 'C') and
+        (Accidental = AccNatural) then YMGetPeriod := N_C5;
+      if (NoteName = 'C') and
+        (Accidental = AccSharp) then YMGetPeriod := N_CS5;
+      if (NoteName = 'D') and
+        (Accidental = AccNatural) then YMGetPeriod := N_D5;
+      if (NoteName = 'D') and
+        (Accidental = AccSharp) then YMGetPeriod := N_DS5;
+      if (NoteName = 'D') and
+        (Accidental = AccFlat) then YMGetPeriod := N_CS5;
+      if (NoteName = 'E') and
+        (Accidental = AccNatural) then YMGetPeriod := N_E5;
+      if (NoteName = 'E') and
+        (Accidental = AccFlat) then YMGetPeriod := N_DS5;
+      if (NoteName = 'F') and
+        (Accidental = AccNatural) then YMGetPeriod := N_F5;
+      if (NoteName = 'F') and
+        (Accidental = AccSharp) then YMGetPeriod := N_FS5;
+      if (NoteName = 'G') and
+        (Accidental = AccNatural) then YMGetPeriod := N_G5;
+      if (NoteName = 'G') and
+        (Accidental = AccSharp) then YMGetPeriod := N_GS5;
+      if (NoteName = 'G') and
+        (Accidental = AccFlat) then YMGetPeriod := N_FS5;
+      if (NoteName = 'A') and
+        (Accidental = AccNatural) then YMGetPeriod := N_A5;
+      if (NoteName = 'A') and
+        (Accidental = AccSharp) then YMGetPeriod := N_AS5;
+      if (NoteName = 'A') and
+        (Accidental = AccFlat) then YMGetPeriod := N_GS5;
+      if (NoteName = 'B') and
+        (Accidental = AccNatural) then YMGetPeriod := N_B5;
+      if (NoteName = 'B') and
+        (Accidental = AccFlat) then YMGetPeriod := N_AS5;
+    end;
 
   if Octave = 6 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C6;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS6;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D6;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS6;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS6;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E6;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS6;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F6;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS6;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G6;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS6;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS6;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A6;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS6;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS6;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B6;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS6;
-  end;
+    begin
+      if (NoteName = 'C') and
+        (Accidental = AccNatural) then YMGetPeriod := N_C6;
+      if (NoteName = 'C') and
+        (Accidental = AccSharp) then YMGetPeriod := N_CS6;
+      if (NoteName = 'D') and
+        (Accidental = AccNatural) then YMGetPeriod := N_D6;
+      if (NoteName = 'D') and
+        (Accidental = AccSharp) then YMGetPeriod := N_DS6;
+      if (NoteName = 'D') and
+        (Accidental = AccFlat) then YMGetPeriod := N_CS6;
+      if (NoteName = 'E') and
+        (Accidental = AccNatural) then YMGetPeriod := N_E6;
+      if (NoteName = 'E') and
+        (Accidental = AccFlat) then YMGetPeriod := N_DS6;
+      if (NoteName = 'F') and
+        (Accidental = AccNatural) then YMGetPeriod := N_F6;
+      if (NoteName = 'F') and
+        (Accidental = AccSharp) then YMGetPeriod := N_FS6;
+      if (NoteName = 'G') and
+        (Accidental = AccNatural) then YMGetPeriod := N_G6;
+      if (NoteName = 'G') and
+        (Accidental = AccSharp) then YMGetPeriod := N_GS6;
+      if (NoteName = 'G') and
+        (Accidental = AccFlat) then YMGetPeriod := N_FS6;
+      if (NoteName = 'A') and
+        (Accidental = AccNatural) then YMGetPeriod := N_A6;
+      if (NoteName = 'A') and
+        (Accidental = AccSharp) then YMGetPeriod := N_AS6;
+      if (NoteName = 'A') and
+        (Accidental = AccFlat) then YMGetPeriod := N_GS6;
+      if (NoteName = 'B') and
+        (Accidental = AccNatural) then YMGetPeriod := N_B6;
+      if (NoteName = 'B') and
+        (Accidental = AccFlat) then YMGetPeriod := N_AS6;
+    end;
 
   if Octave = 7 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C7;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS7;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D7;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS7;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS7;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E7;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS7;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F7;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS7;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G7;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS7;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS7;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A7;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS7;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS7;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B7;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS7;
-  end;
-
-  if Octave = 8 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C8;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS8;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D8;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS8;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS8;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E8;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS8;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F8;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS8;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G8;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS8;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS8;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A8;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS8;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS8;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B8;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS8;
-  end;
-
-  if Octave = 9 then
-  begin
-    if (NoteName = 'C') and
-      (Accidental = AccNatural) then YMGetPeriod := N_C9;
-    if (NoteName = 'C') and
-      (Accidental = AccSharp) then YMGetPeriod := N_CS9;
-    if (NoteName = 'D') and
-      (Accidental = AccNatural) then YMGetPeriod := N_D9;
-    if (NoteName = 'D') and
-      (Accidental = AccSharp) then YMGetPeriod := N_DS9;
-    if (NoteName = 'D') and
-      (Accidental = AccFlat) then YMGetPeriod := N_CS9;
-    if (NoteName = 'E') and
-      (Accidental = AccNatural) then YMGetPeriod := N_E9;
-    if (NoteName = 'E') and
-      (Accidental = AccFlat) then YMGetPeriod := N_DS9;
-    if (NoteName = 'F') and
-      (Accidental = AccNatural) then YMGetPeriod := N_F9;
-    if (NoteName = 'F') and
-      (Accidental = AccSharp) then YMGetPeriod := N_FS9;
-    if (NoteName = 'G') and
-      (Accidental = AccNatural) then YMGetPeriod := N_G9;
-    if (NoteName = 'G') and
-      (Accidental = AccSharp) then YMGetPeriod := N_GS9;
-    if (NoteName = 'G') and
-      (Accidental = AccFlat) then YMGetPeriod := N_FS9;
-    if (NoteName = 'A') and
-      (Accidental = AccNatural) then YMGetPeriod := N_A9;
-    if (NoteName = 'A') and
-      (Accidental = AccSharp) then YMGetPeriod := N_AS9;
-    if (NoteName = 'A') and
-      (Accidental = AccFlat) then YMGetPeriod := N_GS9;
-    if (NoteName = 'B') and
-      (Accidental = AccNatural) then YMGetPeriod := N_B9;
-    if (NoteName = 'B') and
-      (Accidental = AccFlat) then YMGetPeriod := N_AS9;
+    begin
+      if (NoteName = 'C') and
+        (Accidental = AccNatural) then YMGetPeriod := N_C7;
+      if (NoteName = 'C') and
+        (Accidental = AccSharp) then YMGetPeriod := N_CS7;
+      if (NoteName = 'D') and
+        (Accidental = AccNatural) then YMGetPeriod := N_D7;
+      if (NoteName = 'D') and
+        (Accidental = AccSharp) then YMGetPeriod := N_DS7;
+      if (NoteName = 'D') and
+        (Accidental = AccFlat) then YMGetPeriod := N_CS7;
+      if (NoteName = 'E') and
+        (Accidental = AccNatural) then YMGetPeriod := N_E7;
+      if (NoteName = 'E') and
+        (Accidental = AccFlat) then YMGetPeriod := N_DS7;
+      if (NoteName = 'F') and
+        (Accidental = AccNatural) then YMGetPeriod := N_F7;
+      if (NoteName = 'F') and
+        (Accidental = AccSharp) then YMGetPeriod := N_FS7;
+      if (NoteName = 'G') and
+        (Accidental = AccNatural) then YMGetPeriod := N_G7;
+      if (NoteName = 'G') and
+        (Accidental = AccSharp) then YMGetPeriod := N_GS7;
+      if (NoteName = 'G') and
+        (Accidental = AccFlat) then YMGetPeriod := N_FS7;
+      if (NoteName = 'A') and
+        (Accidental = AccNatural) then YMGetPeriod := N_A7;
+      if (NoteName = 'A') and
+        (Accidental = AccSharp) then YMGetPeriod := N_AS7;
+      if (NoteName = 'A') and
+        (Accidental = AccFlat) then YMGetPeriod := N_GS7;
+      if (NoteName = 'B') and
+        (Accidental = AccNatural) then YMGetPeriod := N_B7;
+      if (NoteName = 'B') and
+        (Accidental = AccFlat) then YMGetPeriod := N_AS7;
   end;
 end;
 
@@ -565,13 +488,13 @@ end;
 procedure YMPlayMajorTriad(RootName, RootAcc : char;
   Octave, Volume, Length : integer);
 var
-P1, P2, P3 : integer;
+  P1, P2, P3 : integer;
 
 begin
   P1 := 0;
   P2 := 0;
   P3 := 0;
-  
+
   if (RootName = 'C') and (RootAcc = AccNatural) then
     begin
       P1 := YMGetPeriod('C', AccNatural, Octave);
