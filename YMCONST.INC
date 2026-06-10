@@ -21,7 +21,6 @@ const
 
   { Rest value }
   N_REST = 0;
-
   { Basic note lengths }
   NLWhole = 64;
   NLHalf = 32;
@@ -29,7 +28,7 @@ const
   NLEighth = 8;
   NLSixteenth = 4;
 
-  { Octave 3 note periods}
+  { Octave 3 note periods - Added Manually}
   N_C3 = 7644;
   N_CS3 = 7216;
   N_D3 = 6810;
@@ -85,7 +84,7 @@ const
   N_AS6 = 536;
   N_B6 = 506;
 
-  { Octave 7 note periods }
+  { Octave 7 note periods - added manually}
   N_C7 = 478;
   N_CS7 = 451;
   N_D7 = 426;
@@ -98,34 +97,6 @@ const
   N_A7 = 284;
   N_AS7 = 268;
   N_B7 = 253;
-
-  { Octave 8 note periods }
-  N_C8 = 239;
-  N_CS8 = 226;
-  N_D8 = 213;
-  N_DS8 = 201;
-  N_E8 = 190;
-  N_F8 = 179;
-  N_FS8 = 169;
-  N_G8 = 160;
-  N_GS8 = 150;
-  N_A8 = 142;
-  N_AS8 = 134;
-  N_B8 = 127;
-
-  { Octave 9 note periods }
-  N_C9 = 120;
-  N_CS9 = 113;
-  N_D9 = 107;
-  N_DS9 = 101;
-  N_E9 = 95;
-  N_F9 = 90;
-  N_FS9 = 85;
-  N_G9 = 80;
-  N_GS9 = 75;
-  N_A9 = 71;
-  N_AS9 = 67;
-  N_B9 = 64;
 
 var
   { Cached mixer register and delay scaling }
